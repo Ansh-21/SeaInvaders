@@ -22,4 +22,4 @@ while RUNNING:
 
     for event in pygame.event.get():
         if event.type == QUIT:
-            sys.exit()
+            sys.exit(0)
