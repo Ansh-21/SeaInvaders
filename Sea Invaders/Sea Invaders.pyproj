@@ -21,6 +21,15 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="blaster.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="bullet.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="fish.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="main.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

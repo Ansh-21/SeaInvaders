@@ -3,6 +3,9 @@ import sys
 import pygame
 from pygame.locals import *
 
+from blaster import Blaster
+from fish import Fish
+
 WIDTH, HEIGHT = 640, 480
 FPS = 30
 BLACK = (0,0,0)
