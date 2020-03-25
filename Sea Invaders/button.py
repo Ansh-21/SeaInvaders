@@ -1,7 +1,7 @@
 import pygame, random
 from pygame.locals import *
 
-class Button(object):
+class Button():
     """A simple button class"""
     def __init__(self, dim, coords, onclick):
         self.dimensions = dim
