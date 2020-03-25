@@ -1,4 +1,5 @@
 import sys
+import random
 
 import pygame
 from pygame.locals import *
@@ -28,8 +29,10 @@ outerm_transparency = 128
 RUNNING = True
 
 menu = "menu"
-outfade = False
+menustatus = True
 infade = False
+outfade = False
+
 
 RESUME = False
 
@@ -41,9 +44,9 @@ sea = pygame.image.load("assets/sea.jpg").convert()
 objects = []
 
 def play_resume():
-    outfade = True
+    menustatus = False
     topost = True
-    return [outfade, topost]
+    return [menustatus, topost]
 
 startbtn = Button((250, 45), (310,60), play_resume)
 
@@ -64,18 +67,32 @@ while RUNNING:
     menuobj_alpha.blit(menuobj, (ACTUALMENUCOORDS[0] - MENUCOORDS[0], ACTUALMENUCOORDS[1] - MENUCOORDS[1]))
     screen.blit(menuobj_alpha, MENUCOORDS)
     startbtn.draw_self(screen, (255,0,0,button_transparency))
-    output = startbtn.process([outfade, RESUME])
-    outfade, RESUME = output
+
+    prev_menustatus = menustatus
+    output = startbtn.process([menustatus, RESUME])
+    menustatus, RESUME = output
 
     for event in pygame.event.get():
         if event.type == QUIT:
             sys.exit(0)
         if event.type == KEYDOWN:
             if event.key == K_ESCAPE:
-                infade = True
+                if menustatus:
+                    menustatus = False
+                else:
+                    menustatus = True
+
     if RESUME:
         print("Resume event processed")
         RESUME = False
+
+    if not menustatus:
+        if prev_menustatus:
+            outfade = True
+
+    if menustatus:
+        if not prev_menustatus:
+            infade = True
 
     if outfade:
         for i in range(len(menu_transparencies)):
@@ -91,6 +108,8 @@ while RUNNING:
             button_transparency = 0
         if button_transparency == 0 and innerm_transparency == 0 and outerm_transparency == 0:
             outfade = False
+            startbtn.visible = False
+
     if infade:
         for i in range(len(menu_transparencies)):
             menu_transparencies[i] += 8
@@ -105,4 +124,6 @@ while RUNNING:
             button_transparency = 255
         if button_transparency == 255 and innerm_transparency == 255 and outerm_transparency == 128:
             infade = False
+            startbtn.visible = True
+
     pygame.display.update(screen.get_rect())

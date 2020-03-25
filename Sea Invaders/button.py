@@ -1,4 +1,4 @@
-import pygame
+import pygame, random
 from pygame.locals import *
 
 class Button(object):
@@ -9,6 +9,7 @@ class Button(object):
         self.callback = onclick
         self.surface = pygame.Surface(self.dimensions, flags=SRCALPHA)
         self.pressed = False
+        self.visible = True
     
     def draw_self(self, inputsurface, colour):
         self.surface.fill(colour)
@@ -27,5 +28,9 @@ class Button(object):
             if not self.pressed:
                 if self.mouse_x > self.coords[0] and self.mouse_x < (self.coords[0] + self.dimensions[0]):
                     if self.mouse_y > self.coords[1] and self.mouse_y < (self.coords[1] + self.dimensions[1]):
-                        return self.callback()
+                        if self.visible:
+                            return self.callback()
+        #if random.randint(1,2) == 2:
+        #    if self.visible:
+        #        return self.callback()
         return callback_params
