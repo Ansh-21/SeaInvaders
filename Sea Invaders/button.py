@@ -8,6 +8,7 @@ class Button(object):
         self.coords = coords
         self.callback = onclick
         self.surface = pygame.Surface(self.dimensions, flags=SRCALPHA)
+        self.pressed = False
     
     def draw_self(self, inputsurface, colour):
         self.surface.fill(colour)
@@ -16,12 +17,15 @@ class Button(object):
 
     def process(self, callback_params):
         self.mouse_x, self.mouse_y = pygame.mouse.get_pos()
-        self.pressed = pygame.mouse.get_pressed()
-        if self.pressed[0]:
-            if self.mouse_x > self.coords[0] and self.mouse_x < (self.coords[0] + self.dimensions[0]):
-                if self.mouse_y > self.coords[1] and self.mouse_y < (self.coords[1] + self.dimensions[1]):
-                    return self.callback(callback_params)
-        #if 1:
-            #return self.callback(callback_params)
+        self.pressed_keys = pygame.mouse.get_pressed()
+        self.prev_frame_pressed = self.pressed
+        if self.pressed_keys[0]:
+            self.pressed = True
         else:
-            return callback_params
+            self.pressed = False
+        if self.prev_frame_pressed:
+            if not self.pressed:
+                if self.mouse_x > self.coords[0] and self.mouse_x < (self.coords[0] + self.dimensions[0]):
+                    if self.mouse_y > self.coords[1] and self.mouse_y < (self.coords[1] + self.dimensions[1]):
+                        return self.callback()
+        return callback_params

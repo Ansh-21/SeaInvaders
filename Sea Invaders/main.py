@@ -31,6 +31,8 @@ menu = "menu"
 outfade = False
 infade = False
 
+RESUME = False
+
 pygame.init()
 screen = pygame.display.set_mode(DIMENSIONS)
 
@@ -38,9 +40,10 @@ sea = pygame.image.load("assets/sea.jpg").convert()
 
 objects = []
 
-def play_resume(outfade):
+def play_resume():
     outfade = True
-    return outfade
+    topost = True
+    return [outfade, topost]
 
 startbtn = Button((250, 45), (310,60), play_resume)
 
@@ -61,7 +64,8 @@ while RUNNING:
     menuobj_alpha.blit(menuobj, (ACTUALMENUCOORDS[0] - MENUCOORDS[0], ACTUALMENUCOORDS[1] - MENUCOORDS[1]))
     screen.blit(menuobj_alpha, MENUCOORDS)
     startbtn.draw_self(screen, (255,0,0,button_transparency))
-    outfade = startbtn.process(outfade)
+    output = startbtn.process([outfade, RESUME])
+    outfade, RESUME = output
 
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -69,6 +73,9 @@ while RUNNING:
         if event.type == KEYDOWN:
             if event.key == K_ESCAPE:
                 infade = True
+    if RESUME:
+        print("Resume event processed")
+        RESUME = False
 
     if outfade:
         for i in range(len(menu_transparencies)):
