@@ -6,12 +6,12 @@ This actually took so much work and bugfixing to get to this point, and it's abs
 
 # TODO:
 
-1. Get the basic gameplay:
-  a. Add randomly spawning fish
-  b. Add a controllable blaster
-  c. Add bullets that spawn from the blaster and deapawn at the top
-  d. Make the bullets kill the fish
-2. Get the complicated gameplay:
-  a. Add lives
-  b. Make yourself lose lives when a fish is let through
-3. TBC
+1. Get the basic gameplay:  
+	a. Add randomly spawning fish  
+	b. Add a controllable blaster  
+	c. Add bullets that spawn from the blaster and deapawn at the top  
+	d. Make the bullets kill the fish  
+2. Get the complicated gameplay:  
+	a. Add lives  
+	b. Make yourself lose lives when a fish is let through  
+3. TBC  
