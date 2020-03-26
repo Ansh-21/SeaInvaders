@@ -8,10 +8,10 @@ from pygame.locals import *
 
 ## LOCAL IMPORTS
 from blaster import Blaster
-from fish import Fish
 from button import Button
 from collector import ObjectCollector
 from game import Game
+from fishcontroller import FishController
 
 def run():
     ## GAME SIZE CONSTANTS
@@ -31,7 +31,8 @@ def run():
 
     ## CUSTOMISATION
     FPS = 30
-    SPAWNING_SPEED = 0.5 # spawns per second
+    SPAWNING_SPEED = 0.25 # spawns per second
+    SPEED = 4 # pixels per frame
 
     ## TRANSPARENCIES (ALPHA)
     button_transparency = 255
@@ -41,7 +42,7 @@ def run():
 
     ## GAME FLOW
     running = True
-    game = Game()
+    game = Game(DIMENSIONS, FPS)
     clock = pygame.time.Clock()
 
     ## MENU CONTROL
@@ -53,6 +54,9 @@ def run():
     ## INITIALISATION
     pygame.init()
     screen = pygame.display.set_mode(DIMENSIONS)
+    pygame.display.set_caption("Sea Invaders!")
+    icon = pygame.image.load("assets/icon/icon.jpg")
+    pygame.display.set_icon(icon)
 
     ## BACKGROUND
     sea = pygame.image.load("assets/background/sea.jpg").convert()
@@ -69,6 +73,9 @@ def run():
     ## MENU
     menuobj_alpha = pygame.Surface(MENUDIMENSIONS, flags=SRCALPHA)
     menuobj = pygame.Surface(ACTUALMENUDIMENSIONS, flags=SRCALPHA)
+
+    ## FISH SPAWNER INITIALISATION
+    spawner = FishController(SPAWNING_SPEED, SPEED)
 
 
     ## MAINLOOP
@@ -93,7 +100,7 @@ def run():
         ## PROCESS OBJECTS
         menustatus = startbtn.process(menustatus)
         if not menustatus:
-            ObjectCollector.process_all(game)
+            game, screen = ObjectCollector.process_all(game, screen)
 
         ## EVENT PROCESSING
         for event in pygame.event.get():

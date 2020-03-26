@@ -30,6 +30,9 @@
     <Compile Include="button.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="fishcontroller.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="game.py">
       <SubType>Code</SubType>
     </Compile>
@@ -45,11 +48,13 @@
     <Folder Include="assets\" />
     <Folder Include="assets\background\" />
     <Folder Include="assets\fish\" />
+    <Folder Include="assets\icon\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\background\sea.jpg" />
     <Content Include="assets\fish\fish1.png" />
     <Content Include="assets\fish\fish2.png" />
+    <Content Include="assets\icon\icon.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
