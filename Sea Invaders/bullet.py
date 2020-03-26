@@ -15,10 +15,15 @@ class Bullet(ObjectCollector, pygame.sprite.Sprite):
         self.surface = pygame.transform.scale(self.surface, (66, 84))
         self.surface = pygame.transform.rotate(self.surface, -90)
         self.SPEED = BULLET_SPEED
+        self.dead = False
 
     def process(self, display):
-        self.draw_self(display)
-        self.y -= self.SPEED
+        if not self.dead:
+            self.draw_self(display)
+            self.y -= self.SPEED
+            if self.y < -100:
+                self.dead = True
+                ObjectCollector.remove_this("bullets", self)
 
     def draw_self(self, display):
         display.blit(self.surface, (self.x, self.y))

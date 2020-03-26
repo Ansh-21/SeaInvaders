@@ -34,6 +34,7 @@ class Fish(ObjectCollector, pygame.sprite.Sprite):
             self.draw_self(display)
             if self.y > self.WINDOWHEIGHT + 100:
                 self.dead = True
+                ObjectCollector.remove_this("fish", self)
                 if debug:
                     print("fish type: " + self.type + ", x: " + str(self.x) + " deleted")
             else:
@@ -46,4 +47,8 @@ class Fish(ObjectCollector, pygame.sprite.Sprite):
         display.blit(self.surface, (self.x, self.y))
 
     def bullet_process(self, bullet):
-        return
+        if self.surface.get_rect().move(self.x, self.y).colliderect(bullet.surface.get_rect().move(bullet.x, bullet.y)):
+            bullet.dead = True
+            ObjectCollector.remove_this("bullets", bullet)
+            self.dead = True
+            ObjectCollector.remove_this("fish", self)

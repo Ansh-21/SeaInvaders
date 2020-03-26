@@ -101,10 +101,8 @@ def run():
 		## RENDER BUTTONS
 		startbtn.draw_self(screen, (255,0,0,button_transparency))
 
-		## PROCESS OBJECTS
+		## PROCESS MENU
 		menustatus = startbtn.process(menustatus)
-		if not menustatus:
-			game, screen = ObjectCollector.process_all(game, screen)
 
 		## EVENT PROCESSING
 		for event in pygame.event.get():
@@ -133,6 +131,11 @@ def run():
 		if menustatus:
 			if not prev_menustatus:
 				infade = True
+
+		## PROCESS OBJECTS
+		if not prev_menustatus:
+			if outfade == False:
+			    game, screen = ObjectCollector.process_all(game, screen)
 
 		## FADING LOGIC
 		if outfade:

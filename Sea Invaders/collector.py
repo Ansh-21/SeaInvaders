@@ -1,3 +1,5 @@
+from debugging import *
+
 class ObjectCollector(object):
     """A holder for all game objects."""
     fish = []
@@ -17,7 +19,7 @@ class ObjectCollector(object):
             self.__class__.other.append(self)
 
     @classmethod
-    def process_all(cls, game, screen):
+    def process_all(cls, game, screen, debug=False):
         """Process all current game objects"""
         for fish in cls.fish:
             for bullet in cls.bullets:
@@ -35,4 +37,15 @@ class ObjectCollector(object):
         for obj in cls.other:
             obj.process(screen, game)
 
+        if debug:
+            print(len(cls.bullets))
+            if len(cls.bullets) > 0:
+                print(cls.bullets[0].y)
+
         return game, screen
+
+    @classmethod
+    def remove_this(cls, collection, obj_to_remove):
+        collection = eval("cls." + str(collection))
+        if obj_to_remove in collection:
+            collection.remove(obj_to_remove)
