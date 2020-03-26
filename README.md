@@ -8,8 +8,8 @@ This actually took so much work and bugfixing to get to this point, and it's abs
 
 1. Get the basic gameplay:  
 	a. Add randomly spawning fish (done)  
-	b. Add a controllable blaster  
-	c. Add bullets that spawn from the blaster and deapawn at the top  
+	b. Add a controllable blaster (done)  
+	c. Add bullets that spawn from the blaster and deapawn at the top (done)  
 	d. Make the bullets kill the fish  
 2. Get the complicated gameplay:  
 	a. Add lives  
