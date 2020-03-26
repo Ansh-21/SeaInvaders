@@ -11,12 +11,13 @@ class Button():
         self.pressed = False
         self.visible = True
     
-    def draw_self(self, inputsurface, colour):
+    def draw_self(self, inputsurface, colour) -> None:
+        """Draw the button onto the screen passed as inputsurface with colour colour"""
         self.surface.fill(colour)
         inputsurface.blit(self.surface, self.coords)
-        return inputsurface
 
-    def process(self, callback_params):
+    def process(self, callback_params) -> list:
+        """Takes the current menustatus and tests if the button has been clicked (falling edge detection). If it has, runs the callback. Otherwise, return the current menustatus"""
         self.mouse_x, self.mouse_y = pygame.mouse.get_pos()
         self.pressed_keys = pygame.mouse.get_pressed()
         self.prev_frame_pressed = self.pressed
@@ -30,7 +31,4 @@ class Button():
                     if self.mouse_y > self.coords[1] and self.mouse_y < (self.coords[1] + self.dimensions[1]):
                         if self.visible:
                             return self.callback()
-        #if random.randint(1,2) == 2:
-        #    if self.visible:
-        #        return self.callback()
         return callback_params
