@@ -1,16 +1,17 @@
 class ObjectCollector(object):
     """A holder for all game objects."""
     fish = []
+    active_fish = []
     bullets = []
     controllers = []
     other = []
     def __init__(self):
         """All inheriting objects must call this method to be added to game tracking."""
-        if self.type == "fish":
+        if self.objtype == "fish":
             self.__class__.fish.append(self)
-        elif self.type == "bullet":
+        elif self.objtype == "bullet":
             self.__class__.bullets.append(self)
-        elif self.type == "controller":
+        elif self.objtype == "controller":
             self.__class__.controllers.append(self)
         else:
             self.__class__.other.append(self)
@@ -23,9 +24,8 @@ class ObjectCollector(object):
                 fish.bullet_process(bullet)
 
         for fish in cls.fish:
-            fish.process(game)
-            fish.draw_self(screen)
-        
+            fish.process(game, screen)
+
         for bullet in cls.bullets:
             bullet.process(screen)
 
@@ -33,6 +33,6 @@ class ObjectCollector(object):
             controller.process(game)
 
         for obj in cls.other:
-            obj.process(screen)
+            obj.process(screen, game)
 
         return game, screen

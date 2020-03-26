@@ -3,13 +3,14 @@ from collector import ObjectCollector
 
 class FishController(ObjectCollector):
     """Controls Fish!"""
-    def __init__(self, SPAWNING_SPEED, SPEED):
-        self.type = "controller"
+    def __init__(self, SPAWNING_SPEED, SPEED, STILLFRAMES_MAX):
+        self.objtype = "controller"
         ObjectCollector.__init__(self)
         self.spawning_speed = SPAWNING_SPEED
-        self.speed = SPEED
+        self.SPEED = SPEED
+        self.fish = []
+        self.STILLFRAMES_MAX = STILLFRAMES_MAX
 
     def process(self, game):
         if game.frames_passed % (game.FPS/self.spawning_speed) == 1:
-            fish = Fish(game.DIMENSIONS, self.speed)
-
+            self.fish.append(Fish(game.DIMENSIONS, self.SPEED, self.STILLFRAMES_MAX))         
