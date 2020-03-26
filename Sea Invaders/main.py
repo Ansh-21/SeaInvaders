@@ -78,8 +78,8 @@ while RUNNING:
     ## RENDER MENU (INCLUDING TRANSPARENCY)
     menuobj_alpha.fill((0,255,0,outerm_transparency))
     menuobj.fill((0,255,0,innerm_transparency))
-    screen.blit(menuobj_alpha, MENUCOORDS)
     menuobj_alpha.blit(menuobj, (ACTUALMENUCOORDS[0] - MENUCOORDS[0], ACTUALMENUCOORDS[1] - MENUCOORDS[1]))
+    screen.blit(menuobj_alpha, MENUCOORDS)
     
     ## RENDER BUTTONS
     startbtn.draw_self(screen, (255,0,0,button_transparency))
@@ -95,10 +95,11 @@ while RUNNING:
             sys.exit(0)
         if event.type == KEYDOWN:
             if event.key == K_ESCAPE:
-                if menustatus:
-                    menustatus = False
-                else:
-                    menustatus = True
+                if not infade and not outfade:
+                    if menustatus:
+                        menustatus = False
+                    else:
+                        menustatus = True
 
     ## CUSTOM EVENT PROCESSING
     if RESUME:
@@ -148,5 +149,5 @@ while RUNNING:
             startbtn.visible = True
 
 
-    ## UPDATE DISPLAY
+    ## UPDATE DISPLAYi
     pygame.display.update(screen.get_rect())
