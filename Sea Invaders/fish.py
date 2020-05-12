@@ -26,7 +26,7 @@ class Fish(ObjectCollector, pygame.sprite.Sprite):
         self.moving = False
         self.stillframes = randint(30, STILLFRAMES_MAX)
 
-    def process(self, game, display, debug=False):
+    def process(self, display, game, debug=False):
         """Processes fish movement down the screen"""
         if not self.dead:
             if self.moving:
@@ -35,6 +35,7 @@ class Fish(ObjectCollector, pygame.sprite.Sprite):
             if self.y > self.WINDOWHEIGHT + 100:
                 self.dead = True
                 ObjectCollector.remove_this("fish", self)
+                game.change_score(-1)
                 if debug:
                     print("fish type: " + self.type + ", x: " + str(self.x) + " deleted")
             else:
@@ -46,9 +47,10 @@ class Fish(ObjectCollector, pygame.sprite.Sprite):
     def draw_self(self, display):
         display.blit(self.surface, (self.x, self.y))
 
-    def bullet_process(self, bullet):
+    def bullet_process(self, bullet, game):
         if self.surface.get_rect().move(self.x, self.y).colliderect(bullet.surface.get_rect().move(bullet.x, bullet.y)):
             bullet.dead = True
             ObjectCollector.remove_this("bullets", bullet)
             self.dead = True
             ObjectCollector.remove_this("fish", self)
+            game.change_score(1)

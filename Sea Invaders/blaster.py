@@ -18,7 +18,7 @@ class Blaster(ObjectCollector):
         self.active_cooldown = 0
         self.BULLET_SPEED = BULLET_SPEED
         self.pressed = False
-        self.font = pygame.font.Font(None, 25)
+        self.font = pygame.font.Font("assets/fonts/PressStart2P.ttf", 25)
 
     def process(self, display, game, debug=False, automatic=False):
         self.x = pygame.mouse.get_pos()[0] - 45

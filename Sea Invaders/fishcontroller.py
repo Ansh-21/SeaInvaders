@@ -8,9 +8,8 @@ class FishController(ObjectCollector):
         ObjectCollector.__init__(self)
         self.spawning_speed = SPAWNING_SPEED
         self.SPEED = SPEED
-        self.fish = []
         self.STILLFRAMES_MAX = STILLFRAMES_MAX
 
     def process(self, game):
         if game.frames_passed % (game.FPS/self.spawning_speed) == 1:
-            self.fish.append(Fish(game.DIMENSIONS, self.SPEED, self.STILLFRAMES_MAX))         
+            Fish(game.DIMENSIONS, self.SPEED, self.STILLFRAMES_MAX)

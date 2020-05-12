@@ -6,10 +6,14 @@ class Game(object):
         self.frames_passed = 1
         self.DIMENSIONS = DIMENSIONS
         self.FPS = FPS
+        self.score = 0
 
     def increment_frames(self, debug=False):
         """Run every frame, adds to the frame counter. Used for spawning logic in collector.py's ObjectCollector.process_all(game)"""
         self.frames_passed += 1
         if debug:
             print("One more frame...")
+
+    def change_score(self, amount):
+        self.score += amount
 

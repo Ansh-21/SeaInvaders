@@ -11,9 +11,10 @@ class Button():
         self.pressed = False
         self.visible = True
     
-    def draw_self(self, inputsurface, colour) -> None:
-        """Draw the button onto the screen passed as inputsurface with colour colour"""
+    def draw_self(self, inputsurface, colour):#, text) -> None:
+        """Draw the button onto the screen passed as inputsurface with colour colour and text rendered onto it"""
         self.surface.fill(colour)
+        #self.surface.blit(text, ((self.dimensions[0]/2)-(text.get_rect().width/2), (self.dimensions[1]/2)-(text.get_rect().height/2)))
         inputsurface.blit(self.surface, self.coords)
 
     def process(self, callback_params) -> list:
